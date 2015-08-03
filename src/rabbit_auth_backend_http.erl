@@ -36,8 +36,17 @@ description() ->
 
 %%--------------------------------------------------------------------
 
+set_password_to_cookie(URL, AuthProps) ->
+    case lists:keyfind(password, 1, AuthProps) of
+        {password, Password} -> httpc:set_options([{cookies, enabled}]),
+                                httpc:store_cookies([{"set-cookie", string:concat("NEO_SES=", mochiweb_util:quote_plus(Password))}], URL);
+        _ -> httpc:set_options([{cookies, disabled}])
+    end.
+
 user_login_authentication(Username, AuthProps) ->
-    case http_get(q(user_path, [{username, Username}|AuthProps])) of
+    URL = q(user_path, [{username, Username}]),
+    set_password_to_cookie(URL, AuthProps),
+    case http_get(URL) of
         {error, _} = E  -> E;
         deny            -> {refused, "Denied by HTTP plugin", []};
         "allow" ++ Rest -> Tags = [list_to_atom(T) ||
