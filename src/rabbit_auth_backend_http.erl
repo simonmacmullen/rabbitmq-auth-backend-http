@@ -21,7 +21,7 @@
 -behaviour(rabbit_authn_backend).
 -behaviour(rabbit_authz_backend).
 
--export([description/0, q/2]).
+-export([description/0, p/1, q/1]).
 -export([user_login_authentication/2, user_login_authorization/1,
          check_vhost_access/3, check_resource_access/3]).
 
@@ -37,7 +37,7 @@ description() ->
 %%--------------------------------------------------------------------
 
 user_login_authentication(Username, AuthProps) ->
-    case http_get(q(user_path, [{username, Username}|AuthProps])) of
+    case http_get(p(user_path), q([{username, Username}|AuthProps])) of
         {error, _} = E  -> E;
         deny            -> {refused, "Denied by HTTP plugin", []};
         "allow" ++ Rest -> Tags = [list_to_atom(T) ||
@@ -70,18 +70,18 @@ check_resource_access(#auth_user{username = Username},
 %%--------------------------------------------------------------------
 
 bool_req(PathName, Props) ->
-    case http_get(q(PathName, Props)) of
+    case http_get(p(PathName), q(Props)) of
         "deny"  -> false;
         "allow" -> true;
         E       -> E
     end.
 
-http_get(Path) ->
-    URI = uri_parser:parse(Path, [{port, 80}]),
+http_get(PathName, ReqBody) ->
+    URI = uri_parser:parse(PathName, [{port, 80}]),
     {host, Host} = lists:keyfind(host, 1, URI),
     {port, Port} = lists:keyfind(port, 1, URI),
     HostHdr = rabbit_misc:format("~s:~b", [Host, Port]),
-    case httpc:request(get, {Path, [{"Host", HostHdr}]}, ?HTTPC_OPTS, []) of
+    case httpc:request(post, {PathName, [{"Host", HostHdr}], "application/x-www-form-urlencoded", ReqBody}, ?HTTPC_OPTS, []) of
         {ok, {{_HTTP, Code, _}, _Headers, Body}} ->
             case Code of
                 200 -> case parse_resp(Body) of
@@ -94,11 +94,12 @@ http_get(Path) ->
             E
     end.
 
-q(PathName, Args) ->
+p(PathName) ->
     {ok, Path} = application:get_env(rabbitmq_auth_backend_http, PathName),
-    R = Path ++ "?" ++ string:join([escape(K, V) || {K, V} <- Args], "&"),
-    %%io:format("Q: ~p~n", [R]),
-    R.
+    Path.
+
+q(Args) ->
+    string:join([escape(K, V) || {K, V} <- Args], "&").
 
 escape(K, V) ->
     atom_to_list(K) ++ "=" ++ mochiweb_util:quote_plus(V).
