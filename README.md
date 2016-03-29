@@ -82,6 +82,7 @@ as follows:
 
 * `username`   - the name of the user
 * `vhost`      - the name of the virtual host being accessed
+* `ip`         - the client ip address
 
 Note that you cannot create arbitrary virtual hosts using this plugin; you can only determine whether your users can see / access the ones that exist.
 
