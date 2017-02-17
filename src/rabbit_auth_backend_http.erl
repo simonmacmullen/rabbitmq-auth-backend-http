@@ -14,7 +14,7 @@
 %% Copyright (c) 2007-2016 Pivotal Software, Inc.  All rights reserved.
 %%
 
--module(rabbit_auth_backend_http).
+-module(rabbitmq_auth_backend_http).
 
 -include_lib("rabbit_common/include/rabbit.hrl").
 
