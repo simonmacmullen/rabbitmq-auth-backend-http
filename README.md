@@ -79,6 +79,7 @@ against the URIs listed in the configuration file. It will add query string
 
 * `username` - the name of the user
 * `password` - the password provided (may be missing if e.g. rabbitmq-auth-mechanism-ssl is used)
+* `vhost`    - the name of the virtual host being accessed
 
 ### vhost_path
 

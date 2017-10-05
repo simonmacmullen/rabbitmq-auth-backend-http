@@ -46,7 +46,8 @@ public class AuthBackendHttpController {
 
     @RequestMapping("user")
     public String user(@RequestParam("username") String username,
-                       @RequestParam("password") String password) {
+                       @RequestParam("password") String password,
+                       @RequestParam("vhost") String vhost) {
         LOGGER.info("Trying to authenticate user {}", username);
         User user = users.get(username);
         if (user != null && user.getPassword().equals(password)) {
