@@ -140,6 +140,10 @@ do_http_req(PathName, Query) ->
                            {error, _} = E -> E;
                            Resp           -> Resp
                        end;
+                201 -> case parse_resp(Body) of
+                           {error, _} = E -> E;
+                           Resp           -> Resp
+                       end;
                 _   -> {error, {Code, Body}}
             end;
         {error, _} = E ->
