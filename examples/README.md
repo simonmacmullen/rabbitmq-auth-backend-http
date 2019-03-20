@@ -59,11 +59,11 @@ The application listens on the 8080 port.
 Have a look at the `AuthBackendHttpController`. There's only one user: `guest`,
 with the `guest` password. This implementation also checks the
 routing key starts with an `a` when publishing to a topic exchange
-or consuming from a topic. (an example of [topic authorisation](http://next.rabbitmq.com/access-control.html#topic-authorisation)).
+or consuming from a topic. (an example of [topic authorisation](https://next.rabbitmq.com/access-control.html#topic-authorisation)).
 
 ### rabbitmq.config Example
 
-Below is a [RabbitMQ config file](http://www.rabbitmq.com/configure.html) example to go with this
+Below is a [RabbitMQ config file](https://www.rabbitmq.com/configure.html) example to go with this
 example:
 
 ``` ini
@@ -94,7 +94,7 @@ the plugin can authenticate against. It's really
 
 Open the WebApiHttpAuthService.csproj in Visual Studio 2017, More details about prerequisites can be found below.
 
-As with other examples, RabbitMQ [authentication and authorization backends](http://www.rabbitmq.com/access-control.html) must be configured
+As with other examples, RabbitMQ [authentication and authorization backends](https://www.rabbitmq.com/access-control.html) must be configured
 to use this plugin and the endpoints provided by this example app.
 
 Then Build the solution and run it from Visual Studio.
@@ -129,7 +129,7 @@ for requests and responses.
 
 Open the solution file, WebApiHttpAuthService.sln` in Visual Studio 2017 or later.
 
-As with other examples, RabbitMQ [authentication and authorization backends](http://www.rabbitmq.com/access-control.html) must be configured
+As with other examples, RabbitMQ [authentication and authorization backends](https://www.rabbitmq.com/access-control.html) must be configured
 to use this plugin and the endpoints provided by this example app.
 
 Then build the solution and run it from Visual Studio.
@@ -195,7 +195,7 @@ Users list:
 
 ### rabbitmq.config Example
 
-Below is a [RabbitMQ config file](http://www.rabbitmq.com/configure.html) example to go with this
+Below is a [RabbitMQ config file](https://www.rabbitmq.com/configure.html) example to go with this
 example:
 
 ``` ini
@@ -208,4 +208,4 @@ auth_http.resource_path = http://localhost:62190/auth/resource.php
 auth_http.topic_path    = http://localhost:62190/auth/topic.php
 ```
 
-See [RabbitMQ Access Control guide](http://www.rabbitmq.com/access-control.html) for more information.
+See [RabbitMQ Access Control guide](https://www.rabbitmq.com/access-control.html) for more information.

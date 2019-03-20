@@ -6,7 +6,7 @@ authentication (determining who can log in) and authorisation
 server.
 
 This plugin can put a significant amount of load on its backing service.
-We recommend using it together with [rabbitmq_auth_backend_cache](http://github.com/rabbitmq/rabbitmq-auth-backend-cache)
+We recommend using it together with [rabbitmq_auth_backend_cache](https://github.com/rabbitmq/rabbitmq-auth-backend-cache)
 with a reasonable caching interval (e.g. 1-3 minutes).
 
 
@@ -19,13 +19,13 @@ As of 3.7.0, this plugin is distributed with RabbitMQ.
 
 As of 3.7.0, this plugin is distributed with RabbitMQ.
 
-As with all [authentication plugins](http://rabbitmq.com/access-control.html), this one requires RabbitMQ server
+As with all [authentication plugins](https://rabbitmq.com/access-control.html), this one requires RabbitMQ server
 2.3.1 or later.
 
 ## Using with RabbitMQ 3.6.x
 
 Install the corresponding .ez files from our
-[Community Plugins page](http://www.rabbitmq.com/community-plugins.html). Note that different
+[Community Plugins page](https://www.rabbitmq.com/community-plugins.html). Note that different
 releases of this plugin support different versions of RabbitMQ.
 
 ## Enabling the Plugin
@@ -46,8 +46,8 @@ Or, in the classic config format (`rabbitmq.config`, prior to 3.7.0) or `advance
 
     [{rabbit, [{auth_backends, [rabbit_auth_backend_http]}]}].
 
-See [RabbitMQ Configuration guide](http://www.rabbitmq.com/configure.html) and
-[Access Control guide](http://rabbitmq.com/access-control.html) for more information.
+See [RabbitMQ Configuration guide](https://www.rabbitmq.com/configure.html) and
+[Access Control guide](https://rabbitmq.com/access-control.html) for more information.
 
 You need to configure the plugin to know which URIs to point at
 and which HTTP method to use.
@@ -57,12 +57,12 @@ Below is a minimal configuration file example.
 In `rabbitmq.conf`:
 
     auth_backends.1 = http
-    auth_http.user_path     = http://some-server/auth/user
-    auth_http.vhost_path    = http://some-server/auth/vhost
-    auth_http.resource_path = http://some-server/auth/resource
-    auth_http.topic_path    = http://some-server/auth/topic
+    auth_http.user_path     = https://some-server/auth/user
+    auth_http.vhost_path    = https://some-server/auth/vhost
+    auth_http.resource_path = https://some-server/auth/resource
+    auth_http.topic_path    = https://some-server/auth/topic
 
-In the [classic config format](http://www.rabbitmq.com/configure.html) (`rabbitmq.config` prior to 3.7.0 or `advanced.config`):
+In the [classic config format](https://www.rabbitmq.com/configure.html) (`rabbitmq.config` prior to 3.7.0 or `advanced.config`):
 
     [
       {rabbit, [{auth_backends, [rabbit_auth_backend_http]}]},
@@ -103,7 +103,7 @@ Note that you cannot create arbitrary virtual hosts using this plugin; you can o
 * `vhost`       - the name of the virtual host containing the resource
 * `resource`    - the type of resource (`exchange`, `queue`, `topic`)
 * `name`        - the name of the resource
-* `permission`  - the access level to the resource (`configure`, `write`, `read`) - see [the Access Control guide](http://www.rabbitmq.com/access-control.html) for their meaning
+* `permission`  - the access level to the resource (`configure`, `write`, `read`) - see [the Access Control guide](https://www.rabbitmq.com/access-control.html) for their meaning
 
 ### topic_path
 
@@ -115,7 +115,7 @@ Note that you cannot create arbitrary virtual hosts using this plugin; you can o
 * `routing_key` - the routing key of a published message (when the permission is `write`)
 or routing key of the queue binding (when the permission is `read`)
 
-See [topic authorisation](http://www.rabbitmq.com/access-control.html#topic-authorisation) for more information
+See [topic authorisation](https://www.rabbitmq.com/access-control.html#topic-authorisation) for more information
 about topic authorisation.
 
 Your web server should always return HTTP 200 OK, with a body
@@ -164,6 +164,6 @@ See [examples README](./examples/README.md) for more information.
 ## Building from Source
 
 You can build and install it like any other plugin (see
-[the plugin development guide](http://www.rabbitmq.com/plugin-development.html)).
+[the plugin development guide](https://www.rabbitmq.com/plugin-development.html)).
 
 This plugin depends on the Erlang client (just to grab a URI parser).
